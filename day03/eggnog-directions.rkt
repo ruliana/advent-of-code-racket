@@ -1,6 +1,7 @@
 #lang racket
 
-(provide visited-houses)
+(provide (contract-out
+          [visited-houses (->* (string?) (natural-number/c) natural-number/c)]))
 
 (define (visited-houses directions (number-of-santas 1))
   (dict-count (visit directions number-of-santas)))
