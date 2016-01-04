@@ -1,5 +1,6 @@
 #lang racket
-(provide nice-string?)
+(provide nice-string?
+         nicer-string?)
 
 (define (nice-string? a-string)
   (and
@@ -7,6 +8,11 @@
    (regexp-match? #px"(.)\\1" a-string)
    (not (regexp-match? #px"ab|cd|pq|xy" a-string))))
 
-(define (count-nice (input (in-lines)))
+(define (nicer-string? a-string)
+  (and
+   (regexp-match? #px"(..).*\\1" a-string)
+   (regexp-match? #px"(.).\\1" a-string)))
+
+(define (count-matches matcher (input (in-lines)))
   (for/sum ([line input])
-    (if (nice-string? line) 1 0)))
+    (if (matcher line) 1 0)))
