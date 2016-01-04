@@ -5,9 +5,9 @@
   (let ([a-string (format "~a~a" secret number)])
     (md5 (open-input-string a-string))))
 
-(define (mine secret)
+(define (mine secret (prefix "00000"))
   (let loop ([number 0])
     (let ([coin (advent-coin secret number)])
-      (if (string-prefix? coin "00000")
+      (if (string-prefix? coin prefix)
           (vector number coin)
           (loop (add1 number))))))
