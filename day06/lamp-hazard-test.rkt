@@ -22,18 +22,30 @@
     (let ([grid (new-grid 1000 1000)])
       (grid-change grid "turn on 0,0 through 999,999")
       (check-equal? (grid-sum grid) 1000000)))
-
+   
    (test-case
     "Toggle first line"
     (let ([grid (new-grid 1000 1000)])
       (grid-change grid "toggle 0,0 through 999,0")
       (check-equal? (grid-sum grid) 1000)))
-
+   
    (test-case
     "Toggle four in the middle"
     (let ([grid (new-grid 1000 1000)])
       (grid-change grid "toggle 0,0 through 999,999")
       (grid-change grid "toggle 499,499 through 500,500")
-      (check-equal? (grid-sum grid) 999996)))))
+      (check-equal? (grid-sum grid) 999996)))
+   
+   (test-case
+    "Dimmer one"
+    (let ([grid (new-grid 10 10)])
+      (grid-change grid "turn on 0,0 through 0,0" dimmer)
+      (check-equal? (grid-sum grid) 1)))
+   
+   (test-case
+    "Dimmer all"
+    (let ([grid (new-grid 1000 1000)])
+      (grid-change grid "toggle 0,0 through 999,999" dimmer)
+      (check-equal? (grid-sum grid) 2000000)))))
 
 (test/gui lamp-tests)
